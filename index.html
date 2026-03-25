@@ -1,1 +1,274 @@
-<!-- Updated Projects Section --><section id="projects"><h2>Projects</h2><ul><li><a href="neon-qr-generator.html">Neon QR Generator</a></li><li><a href="magic-image-compressor.html">Magic Image Compressor</a></li><li><a href="vit-faculty-directory.html">VIT Faculty Directory</a></li></ul></section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saurabh Rajpoot | Web Developer</title>
+    <style>
+        /* Base Reset & Variables */
+        :root {
+            --bg-color: #0b0f19;
+            --primary: #06b6d4;
+            --secondary: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Mesh */
+        .bg-mesh {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            background: radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.15), transparent 25%),
+                        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+            animation: breathe 10s infinite alternate;
+        }
+        @keyframes breathe {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(11, 15, 25, 0.8); backdrop-filter: blur(10px);
+            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links a { color: var(--text-main); text-decoration: none; margin-left: 30px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* General Section Styling */
+        section { min-height: 100vh; padding: 100px 10%; display: flex; flex-direction: column; justify-content: center; }
+        h2.section-title { font-size: 2.5rem; margin-bottom: 40px; text-align: center; position: relative; }
+        h2.section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--primary); border-radius: 2px; }
+
+        /* Scroll Animation Classes */
+        .hidden { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .show { opacity: 1; transform: translateY(0); }
+
+        /* Hero Section */
+        #hero { align-items: flex-start; }
+        .greeting { color: var(--primary); font-size: 1.2rem; font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; }
+        #hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 20px; }
+        .typing-text { color: var(--secondary); border-right: 3px solid var(--primary); white-space: nowrap; overflow: hidden; animation: typing 3s steps(30, end), blink 0.75s step-end infinite; }
+        #hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 30px; }
+        
+        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--primary); } }
+
+        /* About Section */
+        .about-content { display: flex; gap: 50px; align-items: center; }
+        .about-text { flex: 1; font-size: 1.1rem; color: var(--text-muted); }
+        .about-text p { margin-bottom: 15px; }
+        .highlight { color: var(--primary); font-weight: bold; }
+        .info-cards { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .info-card { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; text-align: center; backdrop-filter: blur(10px); transition: transform 0.3s; }
+        .info-card:hover { transform: translateY(-5px); border-color: var(--secondary); box-shadow: 0 10px 20px rgba(139, 92, 246, 0.1); }
+        .info-card h3 { color: var(--text-main); margin-bottom: 10px; font-size: 1.2rem; }
+
+        /* Projects Section */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .project-card { 
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); 
+            border-radius: 20px; padding: 30px; backdrop-filter: blur(10px);
+            transition: all 0.4s ease; position: relative; overflow: hidden;
+        }
+        .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, transparent, rgba(6, 182, 212, 0.1), transparent); transform: translateX(-100%); transition: 0.6s; }
+        .project-card:hover::before { transform: translateX(100%); }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(6, 182, 212, 0.15); }
+        .project-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--text-main); }
+        .project-card p { color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem; }
+        .tech-stack { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tech-tag { background: rgba(6, 182, 212, 0.1); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .project-links a { color: var(--text-main); text-decoration: none; font-weight: bold; border-bottom: 2px solid var(--secondary); padding-bottom: 2px; transition: color 0.3s; }
+        .project-links a:hover { color: var(--primary); border-color: var(--primary); }
+
+        /* Contact Section */
+        #contact { text-align: center; justify-content: center; align-items: center; min-height: 70vh; }
+        #contact p { color: var(--text-muted); max-width: 500px; margin: 0 auto 30px auto; font-size: 1.1rem; }
+        .social-links { display: flex; gap: 25px; justify-content: center; margin-bottom: 40px; }
+        .social-links a { 
+            display: flex; align-items: center; justify-content: center;
+            width: 60px; height: 60px; background: var(--card-bg); 
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+            color: var(--text-main); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .social-links a:hover { transform: translateY(-5px) scale(1.1); background: var(--primary); border-color: var(--primary); box-shadow: 0 10px 20px rgba(6, 182, 212, 0.3); }
+        .social-links svg { width: 28px; height: 28px; fill: currentColor; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 3rem; }
+            .about-content { flex-direction: column; }
+            nav { padding: 20px; }
+            .nav-links { display: none; } /* Could add a hamburger menu here later */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-mesh"></div>
+
+    <nav>
+        <div class="logo">&lt;Saurabh/&gt;</div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="hero" class="hidden">
+        <p class="greeting">Hi, my name is</p>
+        <h1>Saurabh Rajpoot.</h1>
+        <h1><span class="typing-text" id="typewriter"></span></h1>
+        <p>I am a passionate developer focused on building functional, highly-optimized, and visually stunning web applications and software utilities.</p>
+        <a href="#projects" style="display: inline-block; padding: 12px 30px; background: var(--primary); color: #000; font-weight: bold; text-decoration: none; border-radius: 30px; margin-top: 10px; transition: 0.3s; box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);">View My Work</a>
+    </section>
+
+    <section id="about" class="hidden">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Hello! I am Saurabh, an aspiring web developer based in <span class="highlight">Jhansi, Uttar Pradesh</span>.</p>
+                <p>My journey into programming started with a fascination for how things work on the internet. Since then, I have been deeply engaged in learning programming languages like C++ and Python, and expanding my skills into front-end web development.</p>
+                <p>When I am away from the keyboard, I love combining creativity with technology. I enjoy video editing and constantly listening to music, which keeps my creative momentum going.</p>
+            </div>
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>Education</h3>
+                    <p style="color: var(--primary); font-size: 1.5rem; font-weight: bold; margin: 10px 0;">VIT Bhopal</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">B.Tech CSE (AI/ML)<br>Class of 2026</p>
+                </div>
+                <div class="info-card">
+                    <h3>Age</h3>
+                    <p style="color: var(--primary); font-size: 2rem; font-weight: bold; margin: 10px 0;">18</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Years of endless curiosity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="hidden">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="project-grid">
+            
+            <div class="project-card">
+                <h3>Magic Image Compressor</h3>
+                <p>A purely serverless, browser-based image compression tool. Features a glassmorphism UI, real-time file size calculations, and instant processing.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">HTML5 Canvas</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">CSS Animations</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo ↗</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Neon QR Generator</h3>
+                <p>An instant QR code generation utility with a sleek cyberpunk aesthetic. Includes error correction and automatic file naming for easy downloads.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">qrcode.js</span>
+                    <span class="tech-tag">Vanilla JS</span>
+                    <span class="tech-tag">CSS Grid</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" target="_blank">Live Demo ↗</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Telegram Utility Bots</h3>
+                <p>Designed and deployed customized automated bots for Telegram, including features like force-subscribing users to channels, handling PDFs, and generating content.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">API Integration</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Saurabh1616" target="_blank">View Code ↗</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact" class="hidden">
+        <h2 class="section-title">Get In Touch</h2>
+        <p>Whether you have a question, a project idea, or just want to say hi, my inbox is always open. I will try my best to get back to you!</p>
+        
+        <div class="social-links">
+            <a href="https://github.com/Saurabh1616" target="_blank" title="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/saurabhrajpoot08/" target="_blank" title="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/oyeeee.saurabh/" target="_blank" title="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.88z"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // 1. Typewriter Effect for the Hero Section
+        const textArray = ["I build web experiences.", "I code in Python & C++.", "I automate tasks."];
+        let textIndex = 0;
+        let charIndex = 0;
+        const typeTarget = document.getElementById("typewriter");
+
+        function type() {
+            if (charIndex < textArray[textIndex].length) {
+                typeTarget.textContent += textArray[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 100);
+            } else {
+                setTimeout(erase, 2000);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                typeTarget.textContent = textArray[textIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, 50);
+            } else {
+                textIndex++;
+                if (textIndex >= textArray.length) textIndex = 0;
+                setTimeout(type, 500);
+            }
+        }
+        
+        // Start typing effect on load
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(type, 1000);
+        });
+
+        // 2. Scroll Animations using Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {
+            threshold: 0.1 // Triggers when 10% of the element is visible
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
